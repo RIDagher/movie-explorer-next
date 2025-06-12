@@ -9,6 +9,7 @@ import {
   fetchTopRatedMovies,
   fetchTrendingMovies,
 } from "../services/movieApi";
+import MovieSection from "../components/MovieSection";
 
 const Home = () => {
 
@@ -80,52 +81,9 @@ const Home = () => {
 
       {!searchTerm && (
         <>
-          {/* Trending Movies Section */}
-          <section>
-            <h2 className="text-xl font-semibold mb-4 text-accent">
-              Trending Movies
-            </h2>
-            {/* Render Trending movies */}
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {trendingMovies
-                .filter((movie) => movie.poster_path)
-                .slice(0, 8)
-                .map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
-          </section>
-          {/* Top Rated Movies Section */}
-          <section>
-            <h2 className="text-xl font-semibold mb-4 text-accent">
-              Top Rated Movies
-            </h2>
-            {/* Render Top Rated movies */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {topRatedMovies
-                .filter((movie) => movie.poster_path)
-                .slice(0, 8)
-                .map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
-          </section>
-          {/* Now Playing Movies Section */}
-          <section>
-            <h2 className="text-xl font-semibold mb-4 text-accent">
-              Now Playing Movies
-            </h2>
-            {/* Render Now Playing movies */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {nowPlayingMovies
-                .filter((movie) => movie.poster_path)
-                .slice(0, 8)
-                .map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
-          </section>
+          <MovieSection title="Trending" movies={trendingMovies} />
+          <MovieSection title="Top Rated" movies={topRatedMovies} />
+          <MovieSection title="Now Playing" movies={nowPlayingMovies} />
         </>
       )}
 

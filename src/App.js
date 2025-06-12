@@ -1,7 +1,6 @@
 import Navbar from "./components/Navbar";
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import SearchMovie from "./pages/SearchMovie";
 import Favorites from "./pages/Favorites";
 import Login from "./pages/Login";
 import MovieDetail from "./pages/MovieDetail";
@@ -13,7 +12,7 @@ function App() {
       {/* App Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/search" element={<SearchMovie />} />
+        {/* <Route path="/search" element={<SearchMovie />} /> */}
         <Route path="/favorites" element={<Favorites />} />
         {/* passing movie id from movieCard component */}
         <Route path="/movie/:id" element={<MovieDetail />}></Route>
