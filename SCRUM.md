@@ -1,13 +1,13 @@
 2025-06-11
 
-What was done:
+### What was done:
 
 - Set up project structure
 - Tailwind and CRA set up with custom color palette
 - Created Navbar, MovieCard, SearchBar components
 - Search functionality and display data in SearchPage
 
-Issues:
+### Issues:
 
 - API key returned 401 until .env setup corrected
 
@@ -16,6 +16,11 @@ Issues:
 - Fetched and displayed trending movies on homepage
 - MovieDetail page with poster, genre, production, cast, and director
 
-Issues:
+### Issues:
 
 - getting familiar with TMDV api endpoints and response structure
+
+### Next:
+
+- Begin styling for pages created
+- Implement Favorites feat/page
