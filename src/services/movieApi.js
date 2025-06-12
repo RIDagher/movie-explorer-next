@@ -23,7 +23,7 @@ export const searchMovies = async (term, page = 1) => {
 
 export const fetchTrendingMovies = async () => {
   try {
-    const url = `${BASE_URL}/trending/movie/week?api_key=${apiKey}`;
+    const url = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
     return data.results;
@@ -34,7 +34,7 @@ export const fetchTrendingMovies = async () => {
 
 export const fetchTopRatedMovies = async () => {
   try {
-    const url = `${BASE_URL}/movie/top_rated?api_key=${apiKey}`;
+    const url = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
     return data.results;
@@ -45,7 +45,7 @@ export const fetchTopRatedMovies = async () => {
 
 export const fetchNowPlayingMovies = async () => {
   try {
-    const url = `${BASE_URL}/movie/now_playing?api_key=${apiKey}`;
+    const url = `${BASE_URL}/movie/now_playing?api_key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
     return data.results;
