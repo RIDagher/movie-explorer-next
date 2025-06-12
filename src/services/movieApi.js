@@ -3,7 +3,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 
 export const searchMovies = async (term, page = 1) => {
   try {
-    const url = new URL(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${term}&page=${page}`);
+    const url = new URL(`${BASE_URL}/search/movie`);
     url.searchParams.append("api_key", API_KEY);
     url.searchParams.append("language", "en-US");
     url.searchParams.append("query", term);
