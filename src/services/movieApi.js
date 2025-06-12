@@ -15,6 +15,10 @@ export const searchMovies = async (term, page = 1) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
+
+  // log full data
+    console.log("Full Data:", data);
+
     return data;
   } catch (error) {
     console.error("Error fetching movies", error);
