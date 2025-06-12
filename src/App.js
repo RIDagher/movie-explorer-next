@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Login from "./pages/Login";
 import MovieDetail from "./pages/MovieDetail";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       {/* App Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/search" element={<SearchMovie />} /> */}
+        <Route path="/search" element={<Search />} />
         <Route path="/favorites" element={<Favorites />} />
         {/* passing movie id from movieCard component */}
         <Route path="/movie/:id" element={<MovieDetail />}></Route>

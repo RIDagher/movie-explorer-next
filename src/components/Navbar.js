@@ -9,12 +9,12 @@ const Navbar = () => {
         <Link to="/" className="hover:text-accent transition">
           Home
         </Link>
-        {/* <Link to="/search" className="hover:text-accent transition">
+        <Link to="/search" className="hover:text-accent transition">
           Search
-        </Link> */}
-        <Link to="/about" className="hover:text-accent transition">
+        </Link> 
+        {/* <Link to="/about" className="hover:text-accent transition">
           About
-        </Link>
+        </Link> */}
         <Link to="/favorites" className="hover:text-accent transition">
           Favorites
         </Link>
