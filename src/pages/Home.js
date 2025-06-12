@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import MovieCard from "../components/MovieCard";
+import SearchBar from "../components/SearchBar";
+import { searchMovies } from "../services/movieApi";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -8,6 +10,10 @@ const Home = () => {
   // Fetch trending movies to display on the homepage
 
   const [movies, setMovies] = useState([]);
+
+  // Search functionality
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   // Fetch tredin movies to display on homepage
@@ -30,10 +36,24 @@ const Home = () => {
     fetchMovies();
   }, []);
 
+  const handleSearch = async(term) => {
+    setSearchTerm(term);
+    setLoading(!loading);
+    try {
+      const data = await searchMovies(term);
+      setMovies(data.results);
+    } catch (error) {
+      console.error("Error fetching movies", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     // Render fetched movies using the reusable MovieCard component
     <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4 text-light">Trending Movies</h2>
+      <SearchBar onSubmit={handleSearch} />
+      <h2 className="text-xl font-semibold mb-4 text-light">{searchTerm? `Search Results for "${searchTerm}"` : "Trending Movies"}</h2>
       {loading ? (
         <p className="text-light">Loading...</p>
       ) : (

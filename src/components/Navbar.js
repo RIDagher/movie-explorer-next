@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; // react-router is the core library and react-router-dom is the DOM bindings 
 
 const Navbar = () => {
   return (
@@ -9,8 +9,11 @@ const Navbar = () => {
         <Link to="/" className="hover:text-accent transition">
           Home
         </Link>
-        <Link to="/search" className="hover:text-accent transition">
+        {/* <Link to="/search" className="hover:text-accent transition">
           Search
+        </Link> */}
+        <Link to="/about" className="hover:text-accent transition">
+          About
         </Link>
         <Link to="/favorites" className="hover:text-accent transition">
           Favorites
