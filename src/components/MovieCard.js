@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // MovieCard component to be in different pages
 const MovieCard = ({ movie }) => {
+  const [addToFav, setAddToFav] = useState([]);
+
+  const handleAddToFav = (e) => {
+    setAddToFav(e);
+  };
+
   return (
-    <div className="bg-card p-4 rounded shadow text-center">
+    <div
+      className="bg-card p-4 rounded shadow text-center transition-transform duration-500 hover:scale-105 pointer-events-auto
+
+pointer-events: "
+    >
       <img
         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
         alt={movie.title}
@@ -19,6 +29,9 @@ const MovieCard = ({ movie }) => {
       >
         View Details
       </Link>
+      <button onClick={handleAddToFav} movie={movie.id}>
+        add to Fav
+      </button>
     </div>
   );
 };

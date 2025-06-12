@@ -1,4 +1,4 @@
-2025-06-11
+Date: 2025-06-11
 
 ### What was done:
 
@@ -11,7 +11,7 @@
 
 - API key returned 401 until .env setup corrected
 
-2025-06-12
+Date: 2025-06-12
 
 - Fetched and displayed trending movies on homepage
 - MovieDetail page with poster, genre, production, cast, and director
@@ -24,3 +24,16 @@
 
 - Begin styling for pages created
 - Implement Favorites feat/page
+
+Date: 2025-06-13
+
+### what's done:
+
+- Styles for Home page, Navbar, MovieDetails
+- Refactor movie fetch calls to a seperate movieApi.js
+- Add MovieSection reausable component
+
+### Next:
+
+- Add FavoritesContext to handle add favorite movies
+-
