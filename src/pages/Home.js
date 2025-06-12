@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import MovieCard from "../components/MovieCard";
+
+const apiKey = process.env.REACT_APP_API_KEY;
 
 const Home = () => {
-  // fetch Movies Ex: Trending Movies
-  return <div>Home</div>;
+  // Fetch trending movies to display on the homepage
 
-  // Grid of MovieCard
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch tredin movies to display on homepage
+  const fetchMovies = async () => {
+    try {
+      const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setMovies(data.results);
+      setLoading(false);
+      console.log(data.results);
+    } catch (err) {
+      console.error("Fetch error", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  return (
+    // Render fetched movies using the reusable MovieCard component
+    <div className="p-4">
+      <h2 className="text-xl font-semibold mb-4 text-light">Trending Movies</h2>
+      {loading ? (
+        <p className="text-light">Loading...</p>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Home;

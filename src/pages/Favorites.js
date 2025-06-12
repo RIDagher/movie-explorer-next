@@ -1,7 +1,7 @@
 import React from "react";
 
 const Favorites = () => {
-  // List of saved MovieCard
+  // List of saved MOvies
   return <div>Favorites</div>;
 };
 
