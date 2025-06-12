@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"; // react-router is the core library and
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center p-5 bg-card shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card shadow-md px-6 py-4 flex justify-between items-center">
       <h1 className="text-xl">Movie Explorer</h1>
       <div className="space-x-6 text-sm">
         <Link to="/" className="hover:text-accent transition">
