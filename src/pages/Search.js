@@ -1,99 +1,67 @@
-// import React, { useEffect } from "react";
-// import { useState } from "react";
-// import MovieCard from "../components/MovieCard";
-// import SearchBar from "../components/SearchBar";
-// import Pagination from "../components/Pagination";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import MovieCard from "../components/MovieCard";
+import SearchBar from "../components/SearchBar";
+import Pagination from "../components/Pagination";
+import {searchMovies} from "../services/movieApi";
 
-// import {
-//   searchMovies,
-//   fetchNowPlayingMovies,
-//   fetchTopRatedMovies,
-//   fetchTrendingMovies,
-// } from "../services/movieApi";
-// import MovieSection from "../components/MovieSection";
 
-// const Home = () => {
+const Home = () => {
 
-//   // Search functionality
-//   const [searchTerm, setSearchTerm] = useState("");
-//   const [searchResults, setSearchResults] = useState([]);
+  // Search functionality
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-//   const [trendingMovies, setTrendingMovies] = useState([]);
-//   const [topRatedMovies, setTopRatedMovies] = useState([]);
-//   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-//   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-//   useEffect(() => {
-//     const loadMovies = async () => {
-//       setLoading(true);
-//       try {
-//         const trending = await fetchTrendingMovies();
-//         const topRated = await fetchTopRatedMovies();
-//         const nowPlaying = await fetchNowPlayingMovies();
+  const handleSearch = async(term, page = 1) => {
+    setSearchTerm(term);
+    setLoading(true);
+    setCurrentPage(page);
+    try {
+      const data = await searchMovies(term, page);
+      setSearchResults(data.results);
+      setTotalPages(data.total_pages);
+    } catch (error) {
+      console.error("Error fetching movies", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-//         setTrendingMovies(trending || []);
-//         setTopRatedMovies(topRated || []);
-//         setNowPlayingMovies(nowPlaying || []);
-//         console.log("Trending:", trending);
-//         console.log("Top Rated:", topRated);
-//         console.log("Now Playing:", nowPlaying);
-//       } catch (err) {
-//         console.error("Error loading movies:", err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     loadMovies();
-//   }, []);
+  const handlePageChange = (page) => {
+    handleSearch(searchTerm, page);
+  };
 
-//   const handleSearch = async(term) => {
-//     setSearchTerm(term);
-//     setLoading(true);
-//     try {
-//       const data = await searchMovies(term);
-//       setSearchResults(data.results);
-//     } catch (error) {
-//       console.error("Error fetching movies", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }
+  if (loading) {
+        return <p className="text-light text-center p-6">Loading...</p>;
+  }
 
-//   if (loading) {
-//         return <p className="text-light text-center p-6">Loading...</p>;
-//   }
+  return (
+    // Main Section
+    <main className="pt-24 p-6 space-y-12">
+      <SearchBar classname="" onSubmit={(term) => handleSearch(term, 1)} />
 
-//   return (
-//     // Main Section
-//     <main className="pt-24 p-6 space-y-12">
-//       <SearchBar onSubmit={handleSearch} />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {searchResults
+          .filter((movie) => movie.poster_path)
+          .map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+      </div>
 
-//       {/* If search term exists, show search results </div> */}
-//       {searchTerm && (
-//       <>
-//         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-//           {searchResults
-//             .filter((movie) => movie.poster_path)
-//             .map((movie) => (
-//               <MovieCard key={movie.id} movie={movie} />
-//             ))}
-//         </div>
-//       </>
-        
-//       )}
+      {searchResults.length > 0 && (
+        <Pagination 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
+    </main>
+  );
+};
 
-//       {!searchTerm && (
-//         <>
-//           <MovieSection title="Trending" movies={trendingMovies} />
-//           <MovieSection title="Top Rated" movies={topRatedMovies} />
-//           <MovieSection title="Now Playing" movies={nowPlayingMovies} />
-//         </>
-//       )}
-
-      
-//     </main>
-//   );
-// };
-
-// export default Home;
+export default Home;

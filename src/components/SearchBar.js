@@ -16,7 +16,7 @@ export const SearchBar = ({onSubmit}) => {
   return (
     <div className="border border-grey-500 rounded px-4 py-2 flex flex-col">
       <form onSubmit={handleFormSubmit}>
-        <input type="text" placeholder="Search..." value={term} onChange={handleChange} />
+        <input className=" text-black" type="text" placeholder="Search..." value={term} onChange={handleChange} />
         <button type="submit"> Search</button>
       </form>
       
