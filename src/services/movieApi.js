@@ -9,22 +9,22 @@ export const searchMovies = async (term, page = 1) => {
     url.searchParams.append("language", "en-US");
     url.searchParams.append("query", term);
     url.searchParams.append("page", page);
-    url.searchParams.append("include_adult", false)
-    
+    url.searchParams.append("include_adult", false);
+
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
 
-  // log full data
+    // log full data
     console.log("Full Data:", data);
 
     return data;
   } catch (error) {
     console.error("Error fetching movies", error);
   }
-}
+};
 
 // Filter-based search using TMDB's built-in filtering engine called /discover
 // TMDB applies the filters directly at their server-side database level before sending the data to the client
@@ -34,7 +34,7 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     url.searchParams.append("api_key", API_KEY);
     url.searchParams.append("language", "en-US");
     url.searchParams.append("page", page);
-    url.searchParams.append("include_adult", false)
+    url.searchParams.append("include_adult", false);
 
     if (filters.genres) {
       url.searchParams.append("with_genres", filters.genres);
@@ -51,10 +51,26 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     }
     const data = await response.json();
     return data;
-    } catch (error) {
+  } catch (error) {
     console.error("Error fetching movies", error);
   }
-}
+};
+
+// Language support using TMDB /configuration/languages API
+export const fetchLanguages = async () => {
+  try {
+    const url = new URL(`${BASE_URL}/configuration/languages`);
+    url.searchParams.append("api_key", API_KEY);
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching languages", error);
+  }
+};
 
 export const fetchTrendingMovies = async () => {
   try {
@@ -89,3 +105,17 @@ export const fetchNowPlayingMovies = async () => {
   }
 };
 
+export const fetchPopularMovies = async (page = 1) => {
+  try {
+    const url = new URL(`${BASE_URL}/movie/popular`);
+    url.searchParams.append("api_key", API_KEY);
+    url.searchParams.append("language", "en-US");
+    url.searchParams.append("page", page);
+
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results;
+  } catch (err) {
+    console.error("Fetch error", err);
+  }
+};
