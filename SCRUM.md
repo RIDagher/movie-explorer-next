@@ -32,8 +32,15 @@ Date: 2025-06-13
 - Styles for Home page, Navbar, MovieDetails
 - Refactor movie fetch calls to a seperate movieApi.js
 - Add MovieSection reausable component
+- Started with simple search page with basic text search functionality and basic pagination
+- Introduced /discover api for filtering (in progress)
+- Integrated TMDB's language API (in progress)
 
 ### Next:
 
 - Add FavoritesContext to handle add favorite movies
--
+- Continue with multi-parameter and multilingual filtering on Search page.
+- Refactor Search page. 
+
+### Issues:
+Identified Search page growing too large with too many states, UI, and logic. Search page needs refactoring.

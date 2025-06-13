@@ -75,13 +75,13 @@ const MovieDetail = () => {
             <strong>Release Date:</strong> {movie.release_date}
           </p>
           <p className="mb-2">
-            <strong>Genres:</strong>
+            <strong>Genres: </strong>
             {movie.genres && movie.genres.map((g) => g.name).join(", ")}
           </p>
           <p className="mt-4 leading-relaxed text-gray-300">{movie.overview}</p>
           {movie.production_companies && (
             <p className="mt-4">
-              <strong>Production:</strong>
+              <strong>Production: </strong>
               {movie.production_companies &&
                 movie.production_companies.map((p) => p.name).join(", ")}
             </p>

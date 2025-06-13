@@ -45,9 +45,19 @@ const Home = () => {
     // Main Section
     <main className="pt-24 p-6 space-y-12">
       <>
-        <MovieSection title="Trending" movies={trendingMovies} />
-        <MovieSection title="Top Rated" movies={topRatedMovies} />
-        <MovieSection title="Now Playing" movies={nowPlayingMovies} />
+        {loading ? (
+          <p className="text-light text-center p-6">Loading...</p>
+        ) : (
+          <>
+            <MovieSection title="Trending" movies={trendingMovies} limit={8} />
+            <MovieSection title="Top Rated" movies={topRatedMovies} limit={8} />
+            <MovieSection
+              title="Now Playing"
+              movies={nowPlayingMovies}
+              limit={8}
+            />
+          </>
+        )}
       </>
     </main>
   );
