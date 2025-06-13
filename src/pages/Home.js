@@ -39,10 +39,6 @@ const Home = () => {
     loadMovies();
   }, []);
 
-  if (loading) {
-    return <p className="text-light text-center p-6">Loading...</p>;
-  }
-
   return (
     // Main Section
     <main className="pt-24 p-6 space-y-12">

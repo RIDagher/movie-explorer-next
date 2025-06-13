@@ -6,7 +6,7 @@ import Pagination from "../components/Pagination";
 import { searchMovies, fetchPopularMovies } from "../services/movieApi";
 import MovieSection from "../components/MovieSection";
 
-const Home = () => {
+const Search = () => {
   // Search functionality
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -105,4 +105,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Search;
