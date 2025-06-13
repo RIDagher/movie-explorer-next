@@ -60,41 +60,47 @@ const Home = () => {
     handleSearch(searchTerm, page);
   };
 
-  if (loading) {
-    return <p className="text-light text-center p-6">Loading...</p>;
-  }
-
   return (
     // Main Section
-    <main className="pt-24 p-6 space-y-12">
+    <main className="pt-24 p-6 space-y-6">
       <SearchBar classname="" onSubmit={(term) => handleSearch(term, 1)} />
 
-      {searchTerm ? (
-        !loading && searchResults.length === 0 ? (
-          <p className="text-light text-center p-6">No movies found.</p>
-        ) : (
-          <>
-            <h2 className="text-xl font-semibold mb-4 text-accent">
-              Search Results for "{searchTerm}"
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {searchResults
-                .filter((movie) => movie.poster_path)
-                .map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
-          </>
-        )
+      {loading ? (
+        <p className="text-light text-center p-6">Loading...</p>
       ) : (
-        <MovieSection title="Popular Movies" movies={popularMovies} />
+        <>
+          {searchTerm ? (
+            searchResults.length === 0 ? (
+              <p className="text-light text-center p-6">No movies found.</p>
+            ) : (
+              <>
+                <div className="flex items-center justify-end">
+                  {/* <h2 className="text-xl font-semibold mb-4 text-accent">
+                    Search Results for "{searchTerm}"
+                  </h2> */}
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+                <MovieSection title="Search Results" movies={searchResults} />
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </>
+            )
+          ) : (
+            <MovieSection
+              title="Popular Movies"
+              movies={popularMovies}
+              limit={8}
+            />
+          )}
+        </>
       )}
-
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
     </main>
   );
 };

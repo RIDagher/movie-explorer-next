@@ -1,14 +1,14 @@
 import MovieCard from "./MovieCard";
 
-const MovieSection = ({ title, movies }) => {
+const MovieSection = ({ title, movies, limit }) => {
+  const displayedMovies = limit ? movies.slice(0, limit) : movies;
   return (
     <div>
       <section>
         <h2 className="text-xl font-semibold mb-4 text-accent">{title}</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          {movies
+          {displayedMovies
             .filter((movie) => movie.poster_path)
-            .slice(0, 8)
             .map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}

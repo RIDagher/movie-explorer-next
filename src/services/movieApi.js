@@ -2,6 +2,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 
 // Text-based search
+// TMDB does fuzzy and language-aware matching automatically
 export const searchMovies = async (term, page = 1) => {
   try {
     const url = new URL(`${BASE_URL}/search/movie`);
@@ -111,6 +112,7 @@ export const fetchPopularMovies = async (page = 1) => {
     url.searchParams.append("api_key", API_KEY);
     url.searchParams.append("language", "en-US");
     url.searchParams.append("page", page);
+    url.searchParams.append("include_adult", false);
 
     const response = await fetch(url);
     const data = await response.json();
