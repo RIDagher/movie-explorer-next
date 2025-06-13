@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
 
 // MovieCard component to be in different pages
 const MovieCard = ({ movie }) => {
+  const [favorites, setFavorites] = useState([]);
+
+  const { toggleFavorite, isFavorite } = useFavorites();
+
+  // useEffect(() => {
+  //   const stored = getFromStorage("favorites", []);
+  //   setFavorites(stored);
+  // }, []);
+
+  // const handleAddToFav = (movie) => {
+  //   const updated = saveToLocalStorage("favorites", movie);
+  //   if (updated) {
+  //     setFavorites(updated);
+  //     console.log("Added to favorites", updated);
+  //   } else {
+  //     console.log("Already in favorites");
+  //   }
+  // };
+
+  const handleAddToFav = () => {};
+
   return (
     <div
       className="bg-card p-4 rounded shadow text-center transition-transform duration-500 hover:scale-105 pointer-events-auto
@@ -23,9 +45,12 @@ pointer-events: "
       >
         View Details
       </Link>
-      {/* <button onClick={handleAddToFav} movie={movie.id}>
-        add to Fav
-      </button> */}
+      <button
+        onClick={() => toggleFavorite(movie)}
+        className=" text-white m-4 text-3xl rounded mt-6 hover:bg-red-700 transition"
+      >
+        {isFavorite(movie) ? "💔" : "❤️"}
+      </button>
     </div>
   );
 };

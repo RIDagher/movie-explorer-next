@@ -25,9 +25,9 @@ const Home = () => {
         setTrendingMovies(trending || []);
         setTopRatedMovies(topRated || []);
         setNowPlayingMovies(nowPlaying || []);
-        console.log("Trending:", trending);
-        console.log("Top Rated:", topRated);
-        console.log("Now Playing:", nowPlaying);
+        // console.log("Trending:", trending);
+        // console.log("Top Rated:", topRated);
+        // console.log("Now Playing:", nowPlaying);
       } catch (err) {
         console.error("Error loading movies:", err);
       } finally {
@@ -38,18 +38,17 @@ const Home = () => {
   }, []);
 
   if (loading) {
-        return <p className="text-light text-center p-6">Loading...</p>;
+    return <p className="text-light text-center p-6">Loading...</p>;
   }
 
   return (
     // Main Section
     <main className="pt-24 p-6 space-y-12">
-        <>
-          <MovieSection title="Trending" movies={trendingMovies} />
-          <MovieSection title="Top Rated" movies={topRatedMovies} />
-          <MovieSection title="Now Playing" movies={nowPlayingMovies} />
-        </>
-    
+      <>
+        <MovieSection title="Trending" movies={trendingMovies} />
+        <MovieSection title="Top Rated" movies={topRatedMovies} />
+        <MovieSection title="Now Playing" movies={nowPlayingMovies} />
+      </>
     </main>
   );
 };
