@@ -25,9 +25,9 @@ const Home = () => {
         setTrendingMovies(trending || []);
         setTopRatedMovies(topRated || []);
         setNowPlayingMovies(nowPlaying || []);
-        console.log("Trending:", trending);
-        console.log("Top Rated:", topRated);
-        console.log("Now Playing:", nowPlaying);
+        // console.log("Trending:", trending);
+        // console.log("Top Rated:", topRated);
+        // console.log("Now Playing:", nowPlaying);
       } catch (err) {
         console.error("Error loading movies:", err);
       } finally {

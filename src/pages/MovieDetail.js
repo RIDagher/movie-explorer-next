@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -7,6 +8,8 @@ const apiKey = process.env.REACT_APP_API_KEY;
 const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const fetchMovieDetail = async () => {
     try {
@@ -56,6 +59,12 @@ const MovieDetail = () => {
         {/* Info */}
         <div>
           <h2 className="text-3xl font-bold mb-4">{movie.title}</h2>
+          <button
+            onClick={() => toggleFavorite(movie)}
+            className="bg-primary px-3 py-1 text-white text-4xl mb-2 rounded mt-6 hover:bg-red-700 transition"
+          >
+            {isFavorite(movie) ? "💔" : "❤️ "}
+          </button>
           <p className="mb-2">
             <strong>Rating:</strong> {movie.vote_average}/10
           </p>
