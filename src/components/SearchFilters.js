@@ -20,6 +20,7 @@ const SearchFilters = ({
         value={filters.genre}
         onChange={(e) => updateFilters({ genre: e.target.value })}
       >
+        {/* TODO: should be fetched from API */}
         <option value="">Genre</option>
         <option value="28">Action</option>
         <option value="12">Adventure</option>
@@ -47,6 +48,7 @@ const SearchFilters = ({
         value={filters.language}
         onChange={(e) => updateFilters({ language: e.target.value })}
       >
+        {/* TODO: should be fetched from API */}
         <option value="">Language</option>
         <option value="en">English</option>
         <option value="es">Spanish</option>
