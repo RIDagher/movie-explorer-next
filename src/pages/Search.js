@@ -3,6 +3,9 @@ import Pagination from "../components/Pagination";
 import MovieSection from "../components/MovieSection";
 import useSearch from "../hooks/useSearch";
 import usePopularMovies from "../hooks/usePopularMovies";
+import useFilter from "../hooks/useFilter";
+import SearchFilters from "../components/SearchFilters";
+import useDiscover from "../hooks/useDiscover";
 
 const Search = () => {
   const {
@@ -17,15 +20,47 @@ const Search = () => {
 
   const { popularMovies, loadingPopular } = usePopularMovies();
 
+  const { filters, updateFilters, resetFilters } = useFilter();
+
+  const {
+    discoverResults,
+    discoverLoading,
+    discoverCurrentPage,
+    discoverTotalPages,
+    handleDiscover,
+  } = useDiscover();
+
+  const handleApplyFilters = () => {
+    handleDiscover(filters, 1);
+  };
+
   return (
     // Main Section
     <main className="pt-24 p-6 space-y-6">
-      {loading || loadingPopular ? (
+      {loading || loadingPopular || discoverLoading ? (
         <p className="text-light text-center p-6">Loading...</p>
       ) : (
         <>
           <SearchBar onSubmit={(term) => handleSearch(term, 1)} />
-          {searchTerm ? (
+          <SearchFilters
+            filters={filters}
+            updateFilters={updateFilters}
+            resetFilters={resetFilters}
+            onApplyFilters={handleApplyFilters}
+          />
+
+          {/* Discover results */}
+          {discoverResults.length > 0 ? (
+            <>
+              <MovieSection title="Filtered results" movies={discoverResults} />
+              <Pagination
+                currentPage={discoverCurrentPage}
+                totalPages={discoverTotalPages}
+                onPageChange={(page) => handleDiscover(page, filters)}
+              />
+            </>
+          ) : // Text search results
+          searchTerm ? (
             searchResults.length === 0 ? (
               <p className="text-light text-center p-6">No movies found.</p>
             ) : (

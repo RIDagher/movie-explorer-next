@@ -9,13 +9,6 @@ const useSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const [filters, setFilters] = useState({
-    year: "",
-    month: "",
-    genre: "",
-    language: "",
-  });
-
   const [loading, setLoading] = useState(false);
 
   const handleSearch = async (term, page = 1) => {
@@ -42,7 +35,6 @@ const useSearch = () => {
     searchResults,
     currentPage,
     totalPages,
-    filters,
     loading,
     handleSearch,
     handlePageChange,

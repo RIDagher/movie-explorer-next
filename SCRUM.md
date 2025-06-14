@@ -40,7 +40,24 @@ Date: 2025-06-13
 
 - Add FavoritesContext to handle add favorite movies
 - Continue with multi-parameter and multilingual filtering on Search page.
-- Refactor Search page. 
+- Refactor Search page.
 
 ### Issues:
+
 Identified Search page growing too large with too many states, UI, and logic. Search page needs refactoring.
+
+Date: 2025-06-14
+
+### what's done:
+
+Refactored Search page into more manageable custom hooks
+Discover search with filters
+Added Popular movies on Search page
+Cleaned the UI
+Pagination for both search and discover
+
+### Next:
+
+Debug filter logic - facing HTTP (400 bad request, undefined results, "Objects are not valid as React child")
+
+### Issues:

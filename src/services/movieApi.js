@@ -43,8 +43,8 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     if (filters.year) {
       url.searchParams.append("primary_release_year", filters.year);
     }
-    if (filters.rating) {
-      url.searchParams.append("vote_average.gte", filters.rating); // to get movies with average rating greater than or equal to the specified rating
+    if (filters.language) {
+      url.searchParams.append("with_original_language", filters.language); // to get movies with average rating greater than or equal to the specified rating
     }
     const response = await fetch(url);
     if (!response.ok) {
@@ -53,25 +53,25 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching movies", error);
+    console.error("Error fetching Discover movies", error);
   }
 };
 
-// Language support using TMDB /configuration/languages API
-export const fetchLanguages = async () => {
-  try {
-    const url = new URL(`${BASE_URL}/configuration/languages`);
-    url.searchParams.append("api_key", API_KEY);
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching languages", error);
-  }
-};
+// // Language support using TMDB /configuration/languages API
+// export const fetchLanguages = async () => {
+//   try {
+//     const url = new URL(`${BASE_URL}/configuration/languages`);
+//     url.searchParams.append("api_key", API_KEY);
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching languages", error);
+//   }
+// };
 
 export const fetchTrendingMovies = async () => {
   try {
