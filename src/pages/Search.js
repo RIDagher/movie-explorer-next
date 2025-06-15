@@ -52,11 +52,18 @@ const Search = () => {
           {/* Discover results */}
           {discoverResults.length > 0 ? (
             <>
+              <div className="flex items-center justify-end">
+                <Pagination
+                  currentPage={discoverCurrentPage}
+                  totalPages={discoverTotalPages}
+                  onPageChange={(page) => handleDiscover(filters, page)}
+                />
+              </div>
               <MovieSection title="Filtered results" movies={discoverResults} />
               <Pagination
                 currentPage={discoverCurrentPage}
                 totalPages={discoverTotalPages}
-                onPageChange={(page) => handleDiscover(page, filters)}
+                onPageChange={(page) => handleDiscover(filters, page)}
               />
             </>
           ) : // Text search results

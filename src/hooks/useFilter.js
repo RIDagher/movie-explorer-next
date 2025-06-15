@@ -4,7 +4,6 @@ import { useState } from "react";
 const useFilter = () => {
   const [filters, setFilters] = useState({
     year: "",
-    month: "",
     genre: "",
     language: "",
   });
@@ -19,7 +18,6 @@ const useFilter = () => {
   const resetFilters = () => {
     setFilters({
       year: "",
-      month: "",
       genre: "",
       language: "",
     });

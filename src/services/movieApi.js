@@ -38,7 +38,7 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     url.searchParams.append("include_adult", false);
 
     if (filters.genres) {
-      url.searchParams.append("with_genres", filters.genres);
+      url.searchParams.append("with_genres", filters.genre);
     }
     if (filters.year) {
       url.searchParams.append("primary_release_year", filters.year);
@@ -54,6 +54,7 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     return data;
   } catch (error) {
     console.error("Error fetching Discover movies", error);
+    return { results: [], total_pages: 1 };
   }
 };
 

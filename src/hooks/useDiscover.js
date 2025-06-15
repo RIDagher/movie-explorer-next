@@ -10,15 +10,10 @@ const useDiscover = () => {
   const handleDiscover = async (filters, page = 1) => {
     setDiscoverLoading(true);
     setDiscoverCurrentPage(page);
-    try {
-      const data = await discoverMovies(filters, page);
-      setDiscoverResults(data.results);
-      setDiscoverTotalPages(data.total_pages);
-    } catch (error) {
-      console.error("Error fetching movies", error);
-    } finally {
-      setDiscoverLoading(false);
-    }
+    const data = await discoverMovies(filters, page);
+    setDiscoverResults(data.results);
+    setDiscoverTotalPages(data.total_pages);
+    setDiscoverLoading(false);
   };
 
   const handleDiscoverPageChange = (page, filters) => {
