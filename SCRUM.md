@@ -56,6 +56,7 @@ Cleaned the UI
 Pagination for both search and discover
 Debug filter logic - facing HTTP (400 bad request, undefined results, "Objects are not valid as React child")
 Unified text-based search and parameters-based filter
+Read next.js documentation
 
 ### Next:
 Globalize the search state
