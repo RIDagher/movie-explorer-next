@@ -1,91 +1,81 @@
 import SearchBar from "../components/SearchBar";
 import Pagination from "../components/Pagination";
 import MovieSection from "../components/MovieSection";
-import useSearch from "../hooks/useSearch";
+import useUnifiedSearch from "../hooks/useUnifiedSearch";
 import usePopularMovies from "../hooks/usePopularMovies";
-import useFilter from "../hooks/useFilter";
 import SearchFilters from "../components/SearchFilters";
-import useDiscover from "../hooks/useDiscover";
 
 const Search = () => {
   const {
-    searchTerm,
-    searchResults,
-    currentPage,
+    formValues,
+    setFormValues,
+    queryParams,
+    setQueryParams,
+    results,
     totalPages,
     loading,
-    handleSearch,
-    handlePageChange,
-  } = useSearch();
+    applyFilters,
+    updatePage,
+  } = useUnifiedSearch();
 
   const { popularMovies, loadingPopular } = usePopularMovies();
 
-  const { filters, updateFilters, resetFilters } = useFilter();
-
-  const {
-    discoverResults,
-    discoverLoading,
-    discoverCurrentPage,
-    discoverTotalPages,
-    handleDiscover,
-  } = useDiscover();
-
-  const handleApplyFilters = () => {
-    handleDiscover(filters, 1);
+  const handleReset = () => {
+    setFormValues({ query: "", year: "", genre: "", language: "" });
+    setQueryParams({ query: "", year: "", genre: "", language: "", page: 1 });
   };
 
   return (
     // Main Section
     <main className="pt-24 p-6 space-y-6">
-      {loading || loadingPopular || discoverLoading ? (
+      {loading || loadingPopular ? (
         <p className="text-light text-center p-6">Loading...</p>
       ) : (
         <>
-          <SearchBar onSubmit={(term) => handleSearch(term, 1)} />
+          <SearchBar formValues={formValues} setFormValues={setFormValues} />
           <SearchFilters
-            filters={filters}
-            updateFilters={updateFilters}
-            resetFilters={resetFilters}
-            onApplyFilters={handleApplyFilters}
+            formValues={formValues}
+            setFormValues={setFormValues}
           />
 
-          {/* Discover results */}
-          {discoverResults.length > 0 ? (
-            <>
-              <div className="flex items-center justify-end">
-                <Pagination
-                  currentPage={discoverCurrentPage}
-                  totalPages={discoverTotalPages}
-                  onPageChange={(page) => handleDiscover(filters, page)}
-                />
-              </div>
-              <MovieSection title="Filtered results" movies={discoverResults} />
-              <Pagination
-                currentPage={discoverCurrentPage}
-                totalPages={discoverTotalPages}
-                onPageChange={(page) => handleDiscover(filters, page)}
-              />
-            </>
-          ) : // Text search results
-          searchTerm ? (
-            searchResults.length === 0 ? (
+          <div className="flex justify-center space-x-4">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={applyFilters}
+            >
+              Discover
+            </button>
+
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleReset}
+            >
+              Reset
+            </button>
+          </div>
+
+          {queryParams.query ||
+          queryParams.year ||
+          queryParams.genre ||
+          queryParams.language ? (
+            results.length === 0 ? (
               <p className="text-light text-center p-6">No movies found.</p>
             ) : (
               <>
                 <div className="flex items-center justify-end">
                   <Pagination
-                    currentPage={currentPage}
+                    currentPage={queryParams.page}
                     totalPages={totalPages}
-                    onPageChange={handlePageChange}
+                    onPageChange={updatePage}
                   />
                 </div>
 
-                <MovieSection title="Search Results" movies={searchResults} />
+                <MovieSection title="Results " movies={results} />
 
                 <Pagination
-                  currentPage={currentPage}
+                  currentPage={queryParams.page}
                   totalPages={totalPages}
-                  onPageChange={handlePageChange}
+                  onPageChange={updatePage}
                 />
               </>
             )

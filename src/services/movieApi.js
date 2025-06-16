@@ -37,6 +37,9 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     url.searchParams.append("page", page);
     url.searchParams.append("include_adult", false);
 
+    // if (filters.query) { // this is ignored silently by TMDB beacuse /discover/movie does not support query param
+    //   url.searchParams.append("query", filters.query);
+    // }
     if (filters.genres) {
       url.searchParams.append("with_genres", filters.genre);
     }
