@@ -1,23 +1,10 @@
 import { searchMovies, discoverMovies } from "../services/movieApi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { SearchContext } from "../context/SearchContext";
 
 const useUnifiedSearch = () => {
-  // Separate form state (not triggering API on change)
-  const [formValues, setFormValues] = useState({
-    query: "",
-    year: "",
-    genre: "",
-    language: "",
-  });
-
-  // Actual query parameters for API request
-  const [queryParams, setQueryParams] = useState({
-    query: "",
-    year: "",
-    genre: "",
-    language: "",
-    page: 1,
-  });
+  const { formValues, setFormValues, queryParams, setQueryParams } =
+    useContext(SearchContext);
 
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);

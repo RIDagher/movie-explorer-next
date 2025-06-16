@@ -6,7 +6,7 @@ export const SearchBar = ({ formValues, setFormValues }) => {
   return (
     <div>
       <input
-        className=" text-black flex-grow border border-grey-500 rounded px-4 py-2"
+        className=" text-black flex-grow w-full border border-grey-500 rounded px-4 py-2"
         type="text"
         placeholder="Search..."
         value={formValues.query}
