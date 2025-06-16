@@ -54,9 +54,10 @@ Discover search with filters
 Added Popular movies on Search page
 Cleaned the UI
 Pagination for both search and discover
+Debug filter logic - facing HTTP (400 bad request, undefined results, "Objects are not valid as React child")
+Unified text-based search and parameters-based filter
 
 ### Next:
-
-Debug filter logic - facing HTTP (400 bad request, undefined results, "Objects are not valid as React child")
+Globalize the search state
 
 ### Issues:
