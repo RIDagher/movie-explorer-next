@@ -58,8 +58,13 @@ Date: 2025-06-14
 - Debug filter logic - facing HTTP (400 bad request, undefined results, "Objects are not valid as React child")
 - Unified text-based search and parameters-based filter
 - Read next.js documentation
+- Add FavoritesContext that handles add favorite movies
 
 ### Next:
--  Globalize the search state
 
-### Issues:
+- Globalize the search state
+- Migrate to Next.js
+
+### Challenges:
+
+- Get more familiar with next.js documentation
