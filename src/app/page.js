@@ -1,14 +1,16 @@
+"use client";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useState } from "react";
 import {
   fetchNowPlayingMovies,
   fetchTopRatedMovies,
   fetchTrendingMovies,
-} from "../services/movieApi";
-import MovieSection from "../components/MovieSection";
+} from "./services/movieApi";
+// import MovieSection from "../components/MovieSection";
+import MovieSection from "./components/MovieSection";
 
-const Home = () => {
+export default function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -57,7 +59,7 @@ const Home = () => {
             favorites.
           </p>
           <Link
-            to="/search"
+            href="/search"
             className="mt-4 px-6 py-3 bg-accent text-white rounded hover:bg-accent-dark transition"
           >
             Start Exploring
@@ -69,16 +71,14 @@ const Home = () => {
           <>
             <MovieSection title="Trending" movies={trendingMovies} limit={4} />
             {/* <MovieSection title="Top Rated" movies={topRatedMovies} limit={8} />
-            <MovieSection
-              title="Now Playing"
-              movies={nowPlayingMovies}
-              limit={8}
-            /> */}
+              <MovieSection
+                title="Now Playing"
+                movies={nowPlayingMovies}
+                limit={8}
+              /> */}
           </>
         )}
       </>
     </main>
   );
-};
-
-export default Home;
+}

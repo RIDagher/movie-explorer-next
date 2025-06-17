@@ -1,11 +1,13 @@
+"use client";
 import SearchBar from "../components/SearchBar";
 import Pagination from "../components/Pagination";
 import MovieSection from "../components/MovieSection";
 import useUnifiedSearch from "../hooks/useUnifiedSearch";
 import usePopularMovies from "../hooks/usePopularMovies";
+// import SearchFilters from "../components/SearchFilters";
 import SearchFilters from "../components/SearchFilters";
 
-const Search = () => {
+export default function SearchPage() {
   const {
     formValues,
     setFormValues,
@@ -92,6 +94,4 @@ const Search = () => {
       )}
     </main>
   );
-};
-
-export default Search;
+}

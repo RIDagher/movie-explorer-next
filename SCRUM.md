@@ -1,4 +1,4 @@
-Date: 2025-06-11
+**_ Date: 2025-06-11 _**
 
 ### What was done:
 
@@ -7,16 +7,18 @@ Date: 2025-06-11
 - Created Navbar, MovieCard, SearchBar components
 - Search functionality and display data in SearchPage
 
-### Issues:
+### Challenges:
 
 - API key returned 401 until .env setup corrected
 
-Date: 2025-06-12
+**_ Date: 2025-06-12 _**
+
+### What was done:
 
 - Fetched and displayed trending movies on homepage
 - MovieDetail page with poster, genre, production, cast, and director
 
-### Issues:
+### Chellenges:
 
 - getting familiar with TMDV api endpoints and response structure
 
@@ -25,7 +27,7 @@ Date: 2025-06-12
 - Begin styling for pages created
 - Implement Favorites feat/page
 
-Date: 2025-06-13
+**_ Date: 2025-06-13 _**
 
 ### what's done:
 
@@ -42,11 +44,11 @@ Date: 2025-06-13
 - Continue with multi-parameter and multilingual filtering on Search page.
 - Refactor Search page.
 
-### Issues:
+### Challenges:
 
 Identified Search page growing too large with too many states, UI, and logic. Search page needs refactoring.
 
-Date: 2025-06-14
+**_ Date: 2025-06-14 _**
 
 ### what's done:
 
@@ -68,3 +70,18 @@ Date: 2025-06-14
 ### Challenges:
 
 - Get more familiar with next.js documentation
+
+**_ Date: 2025-06-17 _**
+
+### what's done:
+
+- Migrated from react to next.js
+
+### Next:
+
+- Refactor some files to follow the framework best practice
+- Add Login/register page with auth
+
+### Challenges:
+
+- Refactor all files to make it work with next.js

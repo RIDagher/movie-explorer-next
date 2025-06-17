@@ -1,12 +1,15 @@
+"use client";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFavorites } from "../context/FavoritesContext";
+import { useRouter } from "next/router";
+import { useFavorites } from "../../context/FavoritesContext";
 
-const apiKey = process.env.REACT_APP_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 // Fetch detailed movie data using the ID from route params
-const MovieDetail = () => {
-  const { id } = useParams();
+
+export default function MovieDetailPage() {
+  const router = useRouter();
+  const { id } = router.query;
   const [movie, setMovie] = useState(null);
 
   const { toggleFavorite, isFavorite } = useFavorites();
@@ -90,6 +93,4 @@ const MovieDetail = () => {
       </div>
     </div>
   );
-};
-
-export default MovieDetail;
+}

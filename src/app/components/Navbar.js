@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // react-router is the core library and react-router-dom is the DOM bindings
-import logo from "../assets/Logo.png";
+import Link from "next/link"; // react-router is the core library and react-router-dom is the DOM bindings
 
 const Navbar = () => {
   return (
@@ -13,19 +12,19 @@ const Navbar = () => {
       {/* <h1 className="text-xl font-semibold text-white">Movie Explorer</h1> */}
 
       <div className="space-x-6 text-sm">
-        <Link to="/" className="hover:text-accent transition">
+        <Link href="/" className="hover:text-accent transition">
           Home
         </Link>
-        <Link to="/search" className="hover:text-accent transition">
+        <Link href="/search" className="hover:text-accent transition">
           Search
         </Link>
         {/* <Link to="/about" className="hover:text-accent transition">
           About
         </Link> */}
-        <Link to="/favorites" className="hover:text-accent transition">
+        <Link href="/favorites" className="hover:text-accent transition">
           Favorites
         </Link>
-        <Link to="/login" className="hover:text-accent transition">
+        <Link href="/login" className="hover:text-accent transition">
           Login
         </Link>
       </div>

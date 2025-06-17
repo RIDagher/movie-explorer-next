@@ -1,9 +1,10 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 
 import MovieSection from "../components/MovieSection";
 
-const Favorites = () => {
+export default function FavoritesPage() {
   // List of saved MOvies
   const { toggleFavorite, isFavorite, favorites } = useFavorites();
 
@@ -19,6 +20,4 @@ const Favorites = () => {
       )}
     </main>
   );
-};
-
-export default Favorites;
+}
