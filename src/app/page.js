@@ -53,14 +53,14 @@ export default function HomePage() {
               : "none",
           }}
         >
-          <h1 className="text-4xl font-bold mb-4">Welcome to MovieExplorer</h1>
-          <p className="text-lg max-w-xl">
+          <h1 className="text-5xl font-bold mb-4">Welcome to MovieExplorer</h1>
+          <p className="text-2xl max-w-xl">
             Discover the latest trending films, search by mood, and save your
             favorites.
           </p>
           <Link
             href="/search"
-            className="mt-4 px-6 py-3 bg-accent text-white rounded hover:bg-accent-dark transition"
+            className="mt-4 font-bold px-6 py-3 bg-accent text-white rounded hover:bg-accent-dark transition"
           >
             Start Exploring
           </Link>

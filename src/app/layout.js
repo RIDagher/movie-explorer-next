@@ -2,6 +2,7 @@ import Providers, { SessionProvider } from "./components/Providers";
 import Navbar from "./components/Navbar";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import { SearchProvider } from "./context/SearchContext";
+// import SessionWrapper from "./components/SessionWrapper";
 import "./styles/globals.css";
 
 export const metadata = {

@@ -1,6 +1,6 @@
-// lib/auth.js
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -26,11 +26,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   pages: {
     signIn: "/login",
   },
   callbacks: {
-    authorized: async ({ auth }) => !!auth,
+    session({ session, token }) {
+      if (token) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+    jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
   },
 });
