@@ -29,7 +29,7 @@ export default function SearchPage() {
 
   return (
     // Main Section
-    <main className="pt-24 p-6 space-y-6">
+    <main className="space-y-12">
       {loading || loadingPopular ? (
         <p className="text-light text-center p-6">Loading...</p>
       ) : (

@@ -1,9 +1,17 @@
-"use client";
+import { redirect } from "next/navigation";
+import { auth } from "../lib/auth.config";
 
-export default function LoginPage() {
+import LoginForm from "../components/LoginForm";
+
+export default async function LoginPage() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/"); // // Already logged in? Redirect to homepage
+  }
   return (
-    <div>
-      <h1>Login</h1>
-    </div>
+    <main className="min-h-screen space-y-12">
+      <LoginForm />
+    </main>
   );
 }

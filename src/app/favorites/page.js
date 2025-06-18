@@ -1,23 +1,22 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useFavorites } from "../context/FavoritesContext";
+import Favorites from "../components/Favorites";
+import { auth } from "../lib/auth.config";
 
-import MovieSection from "../components/MovieSection";
+export default async function FavoritesPage() {
+  const session = await auth();
 
-export default function FavoritesPage() {
-  // List of saved MOvies
-  const { toggleFavorite, isFavorite, favorites } = useFavorites();
-
+  if (!session) {
+    return (
+      <main>
+        <p className="text-center text-gray-400 text-lg">
+          You must be signed in to view favorites.
+        </p>
+      </main>
+    );
+  }
   return (
     // Added main with Top padding so it doesn't hide behind nav
-    <main className="pt-24 p-6 space-y-12">
-      {favorites.length === 0 ? (
-        <p className="text-center text-gray-400 text-lg">
-          You haven’t added any favorites yet.
-        </p>
-      ) : (
-        <MovieSection title="Your Favorites" movies={favorites} />
-      )}
+    <main className="space-y-12">
+      <Favorites />
     </main>
   );
 }
