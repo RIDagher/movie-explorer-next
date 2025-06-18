@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation"; // Next.js hook for client-side params
 import { useFavorites } from "../../context/FavoritesContext";
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -8,8 +8,7 @@ const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 // Fetch detailed movie data using the ID from route params
 
 export default function MovieDetailPage() {
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
   const { toggleFavorite, isFavorite } = useFavorites();
