@@ -1,7 +1,16 @@
+"use client";
 import React from "react";
-import Link from "next/link"; // react-router is the core library and react-router-dom is the DOM bindings
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: "/login" });
+  };
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card shadow-md px-6 py-5 flex justify-between items-center">
       <div className="flex items-center space-x-2">
@@ -21,12 +30,23 @@ const Navbar = () => {
         {/* <Link to="/about" className="hover:text-accent transition">
           About
         </Link> */}
+
         <Link href="/favorites" className="hover:text-accent transition">
           Favorites
         </Link>
-        <Link href="/login" className="hover:text-accent transition">
-          Login
-        </Link>
+
+        {session ? (
+          <button
+            onClick={handleSignOut}
+            className="hover:text-red-400 transition"
+          >
+            Sign Out
+          </button>
+        ) : (
+          <Link href="/login" className="hover:text-accent transition">
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );

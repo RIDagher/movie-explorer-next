@@ -43,7 +43,7 @@ export default function HomePage() {
 
   return (
     // Main Section
-    <main className="pt-24 p-6 space-y-12">
+    <main className=" space-y-12">
       <>
         <div
           className="h-[60vh] bg-cover bg-center flex flex-col justify-center items-start text-white px-10"
