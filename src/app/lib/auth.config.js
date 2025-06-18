@@ -1,10 +1,8 @@
-// lib/auth.js
-// import NextAuth from "next-auth";
+import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { getServerSession } from "next-auth/next";
 
-export const authOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       name: "Credentials",
@@ -40,20 +38,17 @@ export const authOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async session({ session, token }) {
+    session({ session, token }) {
       if (token) {
         session.user.id = token.sub;
       }
       return session;
     },
-    async jwt({ token, user }) {
+    jwt({ token, user }) {
       if (user) {
         token.id = user.id;
       }
       return token;
     },
   },
-};
-
-// export { auth } from "next-auth";
-export const auth = () => getServerSession(authOptions);
+});
