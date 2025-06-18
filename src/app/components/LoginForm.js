@@ -25,10 +25,10 @@ const LoginForm = () => {
       redirect: false,
     });
 
-    if (result?.ok) {
-      router.push("/"); // redirect to home
-    } else {
+    if (result?.error) {
       setError("Invalid email or password");
+    } else {
+      router.push("/");
     }
   };
 
@@ -57,7 +57,7 @@ const LoginForm = () => {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <button
           type="submit"
-          className="w-full bg-accent hover:bg-accent-dark text-white py-2 rounded"
+          className="w-full font-bold bg-accent hover:bg-accent-dark text-white py-2 rounded"
         >
           Login with Email
         </button>
@@ -75,7 +75,7 @@ const LoginForm = () => {
           .map((provider) => (
             <button
               key={provider.name}
-              className="w-full bg-accent hover:bg-accent-dark text-white py-2 rounded"
+              className="w-full font-bold bg-accent hover:bg-accent-dark text-white py-2 rounded"
               onClick={() => signIn(provider.id)}
             >
               Sign in with {provider.name}
