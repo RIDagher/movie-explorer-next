@@ -42,7 +42,7 @@ export default function SearchPage() {
 
           <div className="flex justify-center space-x-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-accent hover:bg-accent-dark text-white font-bold py-2 px-4 rounded"
               onClick={applyFilters}
             >
               Discover
@@ -65,20 +65,24 @@ export default function SearchPage() {
             ) : (
               <>
                 <div className="flex items-center justify-end">
+                  {totalPages > 1 && (
+                    <Pagination
+                      currentPage={queryParams.page}
+                      totalPages={totalPages}
+                      onPageChange={updatePage}
+                    />
+                  )}
+                </div>
+
+                <MovieSection title="Results " movies={results} />
+
+                {totalPages > 1 && (
                   <Pagination
                     currentPage={queryParams.page}
                     totalPages={totalPages}
                     onPageChange={updatePage}
                   />
-                </div>
-
-                <MovieSection title="Results " movies={results} />
-
-                <Pagination
-                  currentPage={queryParams.page}
-                  totalPages={totalPages}
-                  onPageChange={updatePage}
-                />
+                )}
               </>
             )
           ) : (
