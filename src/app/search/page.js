@@ -65,20 +65,24 @@ export default function SearchPage() {
             ) : (
               <>
                 <div className="flex items-center justify-end">
+                  {totalPages > 1 && (
+                    <Pagination
+                      currentPage={queryParams.page}
+                      totalPages={totalPages}
+                      onPageChange={updatePage}
+                    />
+                  )}
+                </div>
+
+                <MovieSection title="Results " movies={results} />
+
+                {totalPages > 1 && (
                   <Pagination
                     currentPage={queryParams.page}
                     totalPages={totalPages}
                     onPageChange={updatePage}
                   />
-                </div>
-
-                <MovieSection title="Results " movies={results} />
-
-                <Pagination
-                  currentPage={queryParams.page}
-                  totalPages={totalPages}
-                  onPageChange={updatePage}
-                />
+                )}
               </>
             )
           ) : (

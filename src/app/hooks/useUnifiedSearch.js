@@ -38,9 +38,12 @@ const useUnifiedSearch = () => {
             );
           }
           if (queryParams.genre) {
-            filteredResults = filteredResults.filter((movie) =>
-              movie.genre_ids.includes(parseInt(queryParams.genre))
-            );
+            const selectedGenre = parseInt(queryParams.genre);
+            if (!isNaN(selectedGenre)) {
+              filteredResults = filteredResults.filter((movie) =>
+                movie.genre_ids?.includes(selectedGenre)
+              );
+            }
           }
           if (queryParams.language) {
             filteredResults = filteredResults.filter(
@@ -49,7 +52,8 @@ const useUnifiedSearch = () => {
           }
 
           setResults(filteredResults);
-          setTotalPages(data.total_pages); // no pagination after Local filtering
+          setTotalPages(1);
+          // setTotalPages(data.total_pages); // no pagination after Local filtering
           return;
         } else {
           // if no query: normal discover filtering

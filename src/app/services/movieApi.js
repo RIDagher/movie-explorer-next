@@ -40,7 +40,7 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     // if (filters.query) { // this is ignored silently by TMDB beacuse /discover/movie does not support query param
     //   url.searchParams.append("query", filters.query);
     // }
-    if (filters.genres) {
+    if (filters.genre) {
       url.searchParams.append("with_genres", filters.genre);
     }
     if (filters.year) {
@@ -60,22 +60,6 @@ export const discoverMovies = async (filters = {}, page = 1) => {
     return { results: [], total_pages: 1 };
   }
 };
-
-// // Language support using TMDB /configuration/languages API
-// export const fetchLanguages = async () => {
-//   try {
-//     const url = new URL(`${BASE_URL}/configuration/languages`);
-//     url.searchParams.append("api_key", API_KEY);
-//     const response = await fetch(url);
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching languages", error);
-//   }
-// };
 
 export const fetchTrendingMovies = async () => {
   try {
