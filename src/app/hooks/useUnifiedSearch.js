@@ -49,11 +49,11 @@ const useUnifiedSearch = () => {
           }
 
           setResults(filteredResults);
-          setTotalPages(1); // no pagination after Local filtering
+          setTotalPages(data.total_pages); // no pagination after Local filtering
           return;
         } else {
           // if no query: normal discover filtering
-          const data = await discoverMovies(queryParams);
+          const data = await discoverMovies(queryParams, queryParams.page);
           setResults(data.results);
           setTotalPages(data.total_pages);
         }
