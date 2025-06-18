@@ -31,7 +31,10 @@ export default function SearchPage() {
     // Main Section
     <main className="space-y-12">
       {loading || loadingPopular ? (
-        <p className="text-light text-center p-6">Loading...</p>
+        <div className="flex justify-center items-center p-6">
+          <div className="w-12 h-12 border-4 border-t-blue-500 border-gray-200 rounded-full animate-spin" />
+          <p className="text-light text-center p-6">Loading...</p>
+        </div>
       ) : (
         <>
           <SearchBar formValues={formValues} setFormValues={setFormValues} />
