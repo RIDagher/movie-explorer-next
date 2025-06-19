@@ -13,12 +13,24 @@ const useUnifiedSearch = () => {
   // API fetch triggered only when queryParams change
   useEffect(() => {
     // Don't trigger search if no search params
-    if (
+    // if (
+    //   !queryParams.query &&
+    //   !queryParams.year &&
+    //   !queryParams.genre &&
+    //   !queryParams.language
+    // ) {
+    //   return;
+    // }
+
+    const noFiltersApplied =
       !queryParams.query &&
       !queryParams.year &&
       !queryParams.genre &&
-      !queryParams.language
-    ) {
+      !queryParams.language;
+
+    console.log("Triggering fetch. queryParams:", queryParams);
+
+    if (noFiltersApplied) {
       return;
     }
     const fetchMovies = async () => {
@@ -57,7 +69,7 @@ const useUnifiedSearch = () => {
           return;
         } else {
           // if no query: normal discover filtering
-          const data = await discoverMovies(queryParams, queryParams.page);
+          data = await discoverMovies(queryParams, queryParams.page);
           setResults(data.results);
           setTotalPages(data.total_pages);
         }
