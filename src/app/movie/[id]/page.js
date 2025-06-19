@@ -5,7 +5,7 @@ import { useFavorites } from "../../context/FavoritesContext";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
-const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+// const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 // Fetch detailed movie data using the ID from route params
 
@@ -41,9 +41,7 @@ export default function MovieDetailPage() {
 
   const fetchMovieDetail = async () => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
-      );
+      const response = await fetch(`/api/movies/${id}`);
       const data = await response.json();
       setMovie(data);
     } catch (err) {
