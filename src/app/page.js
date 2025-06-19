@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useState } from "react";
 import {
-  fetchNowPlayingMovies,
-  fetchTopRatedMovies,
+  // fetchNowPlayingMovies,
+  // fetchTopRatedMovies,
   fetchTrendingMovies,
 } from "./services/movieApi";
 // import MovieSection from "../components/MovieSection";
@@ -12,8 +12,8 @@ import MovieSection from "./components/MovieSection";
 
 export default function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  // const [topRatedMovies, setTopRatedMovies] = useState([]);
+  // const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const heroMovie = trendingMovies[0];
 
   const [loading, setLoading] = useState(false);
@@ -23,12 +23,12 @@ export default function HomePage() {
       setLoading(true);
       try {
         const trending = await fetchTrendingMovies();
-        const topRated = await fetchTopRatedMovies();
-        const nowPlaying = await fetchNowPlayingMovies();
+        // const topRated = await fetchTopRatedMovies();
+        // const nowPlaying = await fetchNowPlayingMovies();
 
         setTrendingMovies(trending || []);
-        setTopRatedMovies(topRated || []);
-        setNowPlayingMovies(nowPlaying || []);
+        // setTopRatedMovies(topRated || []);
+        // setNowPlayingMovies(nowPlaying || []);
         // console.log("Trending:", trending);
         // console.log("Top Rated:", topRated);
         // console.log("Now Playing:", nowPlaying);
