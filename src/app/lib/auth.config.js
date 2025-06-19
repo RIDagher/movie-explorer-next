@@ -1,6 +1,9 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { connectToDatabase } from "./mongodb";
+import User from "../models/User";
+import bcrypt from "bcryptjs";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -11,19 +14,42 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = {
-          id: "1",
-          name: "Test User",
-          email: "test@example.com",
-        };
+        // removed the hardcoded user
+        //   const user = {
+        //     id: "1",
+        //     name: "Test User",
+        //     email: "test@example.com",
+        //   };
+        //   if (
+        //     credentials.email === "test@example.com" &&
+        //     credentials.password === "123456"
+        //   ) {
+        //     return user;
+        //   }
+        //   return null;
 
-        if (
-          credentials.email === "test@example.com" &&
-          credentials.password === "123456"
-        ) {
-          return user;
+        const { email, password } = credentials;
+
+        // Connect to the database
+        await connectToDatabase();
+
+        // Find the user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+          throw new Error("User not found");
         }
-        return null;
+
+        // Compare the provided password with the hashed password in the database
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+          throw new Error("Invalid password");
+        }
+
+        return {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+        };
       },
     }),
     GoogleProvider({
