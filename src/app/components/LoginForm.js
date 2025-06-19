@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getProviders, signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -12,22 +13,27 @@ const LoginForm = () => {
   const [providers, setProviders] = useState({});
 
   useEffect(() => {
-    // getProviders().then(console.log);
     getProviders().then(setProviders);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Call NextAuth signIn with redirect disabled (manual handling)
     const result = await signIn("credentials", {
       email,
       password,
-      redirect: false,
+      redirect: false, // No automatic redirect
     });
 
+    // Handle success or error manually
     if (result?.error) {
+      //  Credentials error returned from backend
       setError("Invalid email or password");
+      toast.error("Login failed ");
     } else {
+      // Successful login
+      toast.success("Successfully signed in!");
       router.push("/");
     }
   };
