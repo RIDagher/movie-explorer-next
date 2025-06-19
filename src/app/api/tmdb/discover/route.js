@@ -2,7 +2,7 @@ import React from "react";
 
 export async function GET(req) {
   // console.log("Proxy Route Received", { req });
-  const { searchParams } = new URL(req.url);
+  const { searchParams } = new URL(req.url); // searchParams are built-in object that parses everything after the ?
   const page = searchParams.get("page") || 1;
   const genre = searchParams.get("with_genres");
   const year = searchParams.get("primary_release_year");
