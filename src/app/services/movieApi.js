@@ -6,12 +6,17 @@
 // TMDB does fuzzy and language-aware matching automatically
 export const searchMovies = async (term, page = 1) => {
   try {
-    const url = new URL("/api/tmdb/search", window.location.origin);
+    const origin =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost:3000"; // or prod domain
 
-    url.searchParams.append("query", term);
+    const url = new URL("/api/tmdb/search", origin);
+
+    url.searchParams.append("query", encodeURIComponent(term));
     url.searchParams.append("page", page);
 
-    const response = await fetch(url.toString());
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -31,7 +36,11 @@ export const searchMovies = async (term, page = 1) => {
 // TMDB applies the filters directly at their server-side database level before sending the data to the client
 export const discoverMovies = async (filters = {}, page = 1) => {
   try {
-    const url = new URL("/api/tmdb/discover", window.location.origin);
+    const origin =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost:3000"; // or prod domain
+    const url = new URL("/api/tmdb/discover", origin);
     // url.searchParams.append("api_key", API_KEY);
     // url.searchParams.append("language", "en-US");
     url.searchParams.append("page", filters.page || 1);

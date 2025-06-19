@@ -2,22 +2,46 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation"; // Next.js hook for client-side params
 import { useFavorites } from "../../context/FavoritesContext";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
-const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+// const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 // Fetch detailed movie data using the ID from route params
 
 export default function MovieDetailPage() {
+  // Extract dynamic movie ID from route params
   const { id } = useParams();
+
   const [movie, setMovie] = useState(null);
 
+  // Access global favorites context
   const { toggleFavorite, isFavorite } = useFavorites();
+
+  // Get authentication session info
+  const { data: session } = useSession();
+
+  //  Handle Add/Remove Favorites with authentication check
+  const handleAddToFavorite = () => {
+    const wasFavorite = isFavorite(movie);
+
+    if (!session) {
+      toast.error("You must be signed in to add/remove favorites!");
+      return;
+    }
+
+    toggleFavorite(movie);
+
+    if (wasFavorite) {
+      toast.error("Removed from favorites");
+    } else {
+      toast.success("Added to favorites!");
+    }
+  };
 
   const fetchMovieDetail = async () => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
-      );
+      const response = await fetch(`/api/movies/${id}`);
       const data = await response.json();
       setMovie(data);
     } catch (err) {
@@ -43,7 +67,6 @@ export default function MovieDetailPage() {
         <div className="bg-black bg-opacity-60 p-4 rounded w-full text-center">
           <h1 className="text-4xl font-bold mb-2">{movie.title}</h1>
           <p className="text-lg">NOW AVAILABLE ON DIGITAL AND BLU-RAY™</p>
-          <div className="mt-4 space-x-4"></div>
         </div>
       </div>
 
@@ -62,8 +85,8 @@ export default function MovieDetailPage() {
         <div>
           <h2 className="text-3xl font-bold mb-4">{movie.title}</h2>
           <button
-            onClick={() => toggleFavorite(movie)}
-            className="bg-primary px-3 py-1 text-white text-4xl mb-2 rounded mt-6 hover:bg-red-700 transition"
+            onClick={handleAddToFavorite}
+            className="text-3xl transition-transform duration-300 hover:scale-125"
           >
             {isFavorite(movie) ? "💔" : "❤️ "}
           </button>
