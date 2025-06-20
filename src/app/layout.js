@@ -9,6 +9,9 @@ import { Toaster } from "react-hot-toast";
 export const metadata = {
   title: " MovieExplorer",
   description: "Discover and explore movies",
+  icons: {
+    icon: "/favicon-v2.ico",
+  },
 };
 
 export default function RootLayout({ children }) {

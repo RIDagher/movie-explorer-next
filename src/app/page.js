@@ -40,6 +40,15 @@ export default function HomePage() {
     };
     loadMovies();
   }, []);
+  // While fetching data
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-16 h-16 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin" />
+        <p className="ml-4 text-light text-lg">Loading movies...</p>
+      </div>
+    );
+  }
 
   return (
     // Main Section

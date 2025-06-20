@@ -53,7 +53,15 @@ export default function MovieDetailPage() {
     fetchMovieDetail();
   }, [id]);
 
-  if (!movie) return <p className="text-center p-6 text-light">Loading...</p>;
+  // if (!movie) return <p className="text-center p-6 text-light">Loading...</p>;
+  if (!movie) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-16 h-16 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin" />
+        <p className="ml-4 text-light text-lg">Loading movies...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="text-light bg-dark min-h-screen">
