@@ -20,7 +20,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "npx serve@latest ./build"
+    "start": "npx serve@latest ./build",
+    "vercel-build": "next build"
   },
   "eslintConfig": {
     "extends": [
